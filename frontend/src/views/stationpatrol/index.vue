@@ -29,6 +29,10 @@
         <span>{{ field }}</span>
         <input v-model="filters[field]" :placeholder="`按${field}检索`" />
       </label>
+      <label class="filter-item check">
+        <input v-model="onlyRectify" type="checkbox" />
+        <span>只看抢修恢复待整改</span>
+      </label>
       <button class="btn" type="submit">查询</button>
       <button class="btn ghost" type="button" @click="resetFilters">重置条件</button>
     </form>
@@ -82,15 +86,16 @@ import {
 import type { EntryRow } from '@/data/types'
 
 const meta = moduleMeta('stationpatrol')
-const columns = ["巡检编号", "巡检站点", "巡检路线", "巡检人", "巡检日期", "发现问题数", "整改期限", "巡检状态"]
+const columns = ["巡检编号", "巡检站点", "巡检路线", "巡检人", "巡检日期", "发现问题数", "整改期限", "来源抢修单", "整改事项"]
 const actions = ["提交巡检", "确认整改", "上报问题"]
-const statuses = ["待巡检", "巡检中", "已整改", "已上报"]
+const statuses = ["待巡检", "巡检中", "待整改", "已整改", "已上报"]
 const stats = [{"label": "待巡检站点", "value": 0}, {"label": "待整改问题", "value": 0}, {"label": "本月巡检次数", "value": 0}]
 
 const rows = ref<EntryRow[]>([])
 const total = ref(0)
 const errorMessage = ref('')
 const filters = ref<Record<string, string>>({})
+const onlyRectify = ref(false)
 const filterFields = columns.slice(0, 3)
 const statusSummary = computed(() =>
   statuses.map((status: string) => ({
@@ -101,6 +106,7 @@ const statusSummary = computed(() =>
 
 function resetFilters() {
   filters.value = {}
+  onlyRectify.value = false
   reload()
 }
 
@@ -126,7 +132,9 @@ function reload() {
   errorMessage.value = ''
   try {
     const payload = listEntries(meta.key, filters.value)
-    rows.value = payload.items
+    rows.value = onlyRectify.value
+      ? payload.items.filter((row) => String(row.status) === '待整改')
+      : payload.items
     total.value = payload.total
   } catch (error) {
     errorMessage.value = error instanceof Error ? error.message : '站点巡检列表读取失败'
