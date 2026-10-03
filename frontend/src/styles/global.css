@@ -35,3 +35,30 @@ body { margin: 0; background: #f6f8fb; color: #1f2937; }
 .error-text { color: #b42318; }
 .status-legend { display: flex; flex-wrap: wrap; gap: 12px; margin: 0 0 10px; font-size: 12px; color: var(--muted); }
 .legend-item { background: #eef2f7; border-radius: 999px; padding: 2px 10px; }
+.legend-item.warn { background: #fef3c7; color: #92400e; }
+.ok-text { color: #067647; }
+.identity-bar { display: flex; flex-wrap: wrap; gap: 16px; align-items: center; background: #fff; border: 1px solid var(--border); border-radius: 8px; padding: 8px 12px; margin-bottom: 12px; font-size: 13px; }
+.identity-item span { color: var(--muted); margin-right: 6px; }
+.duty-line { color: var(--muted); }
+.badge { display: inline-block; border-radius: 999px; padding: 1px 8px; font-size: 12px; background: #eef2f7; color: var(--muted); margin-left: 4px; }
+.badge.warn { background: #fef3c7; color: #92400e; }
+.badge.lock { background: #e2e8f0; color: #475569; }
+.badge.pass { background: #dcfae6; color: #067647; }
+.badge.fail { background: #fee4e2; color: #b42318; }
+.drawer-mask { position: fixed; inset: 0; background: rgba(15, 23, 42, 0.35); z-index: 20; }
+.drawer { position: absolute; top: 0; right: 0; bottom: 0; width: 420px; max-width: 92vw; background: #fff; padding: 16px 18px; overflow-y: auto; box-shadow: -4px 0 16px rgba(15, 23, 42, 0.12); }
+.drawer-head { display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px; }
+.drawer-head h3 { margin: 0; font-size: 15px; }
+.drawer-sub { font-size: 13px; margin: 16px 0 8px; color: var(--muted); }
+.detail-grid { display: grid; grid-template-columns: 96px 1fr; gap: 6px 10px; margin: 0; font-size: 13px; }
+.detail-grid dt { color: var(--muted); }
+.detail-grid dd { margin: 0; }
+.assess-line { font-size: 13px; background: #eef2f7; border-radius: 6px; padding: 6px 10px; }
+.form-item { display: block; margin-bottom: 10px; font-size: 13px; }
+.form-item span { display: block; color: var(--muted); font-size: 12px; margin-bottom: 4px; }
+.form-item input, .form-item select, .identity-item select { border: 1px solid var(--border); border-radius: 6px; padding: 6px 8px; font-size: 13px; }
+.form-item input, .form-item select { width: 100%; }
+.readonly-tip { font-size: 12px; color: var(--muted); background: #f8fafc; border-radius: 6px; padding: 6px 10px; }
+.audit-list { list-style: none; margin: 0; padding: 0; font-size: 12px; }
+.audit-list li { display: flex; gap: 8px; padding: 6px 0; border-bottom: 1px dashed var(--border); }
+.audit-time { color: var(--muted); white-space: nowrap; }
